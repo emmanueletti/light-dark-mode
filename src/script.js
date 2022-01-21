@@ -10,7 +10,9 @@ const image2 = document.getElementById('image2');
 const image3 = document.getElementById('image3');
 const textBox = document.getElementById('text-box');
 
-// constants
+// Constants
+const DARK_THEME = 'DARK';
+const LIGHT_THEME = 'LIGHT';
 const THEME_VALUES = {
   LIGHT: {
     NAV_BACKGROUND: 'rgb(255 255 255 / 50%)',
@@ -37,9 +39,9 @@ const saveThemeToLocalStorage = (value) => {
 };
 
 const initializeTheme = () => {
-  const savedTheme = localStorage.getItem('themePref') ?? 'LIGHT';
+  const savedTheme = localStorage.getItem('themePref') ?? LIGHT_THEME;
   toggleDarkLightTheme(savedTheme);
-  if (savedTheme === 'DARK') {
+  if (savedTheme === DARK_THEME) {
     toggleSwitch.checked = true;
   }
 };
@@ -58,7 +60,7 @@ const toggleDarkLightTheme = (theme) => {
   image2.src = THEME_VALUES[theme].IMAGE_2_SRC;
   image3.src = THEME_VALUES[theme].IMAGE_3_SRC;
 
-  theme === 'DARK'
+  theme === DARK_THEME
     ? rootDocument.setAttribute('data-theme', 'dark')
     : rootDocument.removeAttribute('data-theme');
 };
@@ -66,7 +68,7 @@ const toggleDarkLightTheme = (theme) => {
 // Switch theme dynamically
 const switchTheme = (e) => {
   const userWantsDarkMode = e.target.checked;
-  const theme = userWantsDarkMode ? 'DARK' : 'LIGHT';
+  const theme = userWantsDarkMode ? DARK_THEME : LIGHT_THEME;
   toggleDarkLightTheme(theme);
   saveThemeToLocalStorage(theme);
 };
